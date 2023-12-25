@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/gobwas/ws"
+	"github.com/luckysdream/ws"
 )
 
 func TestCipherReader(t *testing.T) {

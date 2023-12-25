@@ -410,7 +410,7 @@ func writeStatusText(bw *bufio.Writer, code int) {
 	bw.WriteByte(' ')
 	bw.WriteString(http.StatusText(code))
 	bw.WriteString(crlf)
-	bw.WriteString("Content-Type: text/plain; charset=utf-8")
+	bw.WriteString("Content-Type: text/html; charset=utf-8")
 	bw.WriteString(crlf)
 }
 

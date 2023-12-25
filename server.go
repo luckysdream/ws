@@ -401,6 +401,8 @@ type Upgrader struct {
 	OnBeforeUpgrade func() (header HandshakeHeader, err error)
 }
 
+var HostByte = []byte("Host")
+
 // Upgrade zero-copy upgrades connection to WebSocket. It interprets given conn
 // as connection with incoming HTTP Upgrade request.
 //
@@ -498,6 +500,7 @@ func (u Upgrader) Upgrade(conn io.ReadWriter) (hs Handshake, err error) {
 
 		nonce = make([]byte, nonceSize)
 	)
+	hs.HeaderMap.Header = make(http.Header)
 	for err == nil {
 		line, e := readLine(br)
 		if e != nil {
@@ -512,6 +515,16 @@ func (u Upgrader) Upgrade(conn io.ReadWriter) (hs Handshake, err error) {
 		if !ok {
 			err = ErrMalformedRequest
 			break
+		}
+		hs.HeaderMap.Header.Add(string(k), string(v))
+
+		if bytes.Equal(k, HostByte) {
+			hs.HeaderMap.Host = string(v)
+
+			if strings.Contains(hs.HeaderMap.Host, ":") {
+				host, _, _ := net.SplitHostPort(string(v))
+				hs.HeaderMap.Host = host
+			}
 		}
 
 		switch btsToString(k) {

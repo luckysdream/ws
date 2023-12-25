@@ -16,9 +16,9 @@ import (
 	"time"
 
 	"github.com/gobwas/httphead"
-	"github.com/gobwas/ws"
-	"github.com/gobwas/ws/wsflate"
-	"github.com/gobwas/ws/wsutil"
+	"github.com/luckysdream/ws"
+	"github.com/luckysdream/ws/wsflate"
+	"github.com/luckysdream/ws/wsutil"
 )
 
 var addr = flag.String("listen", ":9001", "addr to listen")

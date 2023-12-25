@@ -31,6 +31,8 @@ type Handshake struct {
 
 	// Extensions is the list of negotiated extensions.
 	Extensions []httphead.Option
+
+	HeaderMap http.Request
 }
 
 // Errors used by the websocket client.

@@ -1,4 +1,4 @@
-module github.com/gobwas/ws
+module github.com/luckysdream/ws
 
 go 1.15
 
